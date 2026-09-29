@@ -1,5 +1,5 @@
 @extends('layouts.main')
 
 @section('content')
-    Welcome
+    Overzicht advertenties
 @endsection()

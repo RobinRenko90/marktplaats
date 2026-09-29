@@ -25,6 +25,6 @@ class RegistrationController extends Controller
 
         $user = User::create($validateData);
 
-        return redirect()->route('login');
+        return redirect('/');
     }
 }

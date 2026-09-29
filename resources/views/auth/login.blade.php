@@ -5,7 +5,7 @@
         <h2 class="text-center text-xl font-bold mb-5">Welkom</h2>
         @include('components.alerts')
 
-        <form class="bg-gray-200 rounded w-150 p-4 grid" action="" method="post">
+        <form class="bg-gray-200 rounded w-150 p-4 grid" action="{{ route('login') }}" method="post">
             @csrf
 
             <label class="text-sm font-bold" for="email">E-mail</label>
