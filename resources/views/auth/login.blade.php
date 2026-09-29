@@ -14,7 +14,7 @@
             <label class="mt-4 text-sm font-bold" for="password">Wachtwoord</label>
             <input class="bg-white rounded py-1 px-2" type="password" name="password" id="password">
 
-            <a href="" class="text-xs mt-2">Wachtwoord vergeten</a>
+            <a href="{{ route('forgotPassword.show') }}" class="text-xs mt-2">Wachtwoord vergeten</a>
 
             <input class="font-bold mt-4 cursor-pointer bg-white rounded p-2 border border-gray-400" type="submit" value="login">
         </form>
