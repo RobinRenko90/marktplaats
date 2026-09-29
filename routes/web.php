@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertismentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasswordForgottenController;
@@ -25,4 +26,6 @@ Route::middleware(['auth'])->group( function() {
     Route::get('/dashboard', function() {
         return view('dashboard');
     });
+
+    Route::resource('/advertisement', AdvertismentController::class);
 });
