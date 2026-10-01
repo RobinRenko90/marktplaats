@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+
+use Auth;
 
 class RegistrationController extends Controller
 {
@@ -25,6 +28,8 @@ class RegistrationController extends Controller
 
         $user = User::create($validateData);
 
-        return redirect('/');
+        Auth::login($user);
+
+        return redirect('dashboard');
     }
 }

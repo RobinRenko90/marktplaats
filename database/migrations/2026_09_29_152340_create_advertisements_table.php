@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
-            $table->decimal('price')->nullable();
+            $table->string('price')->nullable();
             $table->foreignIdFor(User::class)->onDelete('cascade');
             $table->boolean('premium')->nullable();
             $table->timestamps();

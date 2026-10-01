@@ -7,3 +7,9 @@
         </ul>
     </div>
 @endif
+
+@if (session('success'))
+    <div class="p-2 my-5 bg-green-500 text-white rounded">
+        {{ session('success') }}
+    </div>
+@endif

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div>
+    <div class="grid items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
         <h2 class="text-center text-xl font-bold mb-5">Registreren</h2>
         @include('components.alerts')
         <form class="bg-gray-200 rounded w-150 p-4 grid " action="" method="post">
@@ -9,7 +9,7 @@
 
             <div class="flex gap-4">
                 <div>
-                    <label class="mt-4 text-sm font-bold" for="first_name">voornaam</label>
+                    <label class="mt-4 text-sm font-bold" for="first_name">Voornaam</label>
                     <input class="bg-white rounded py-1 px-2 w-full" type="text" name="first_name" id="first_name" value="{{ old('first_name') }}">
                 </div>
                 <div>

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div>
+    <div class="grid items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
         <h2 class="text-center text-xl font-bold mb-5">Welkom</h2>
         @include('components.alerts')
 

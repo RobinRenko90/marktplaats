@@ -17,7 +17,7 @@ class CreateAdvertisementRequest extends FormRequest
         return [
             'title'         => 'required',
             'description'   => 'required',
-            'price'         => 'required|decimal:2',
+            'price'         => 'required',
         ];
     }
 }

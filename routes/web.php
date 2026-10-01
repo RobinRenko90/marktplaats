@@ -23,9 +23,7 @@ Route::get('/reset-password/{token}', [PasswordResetController::class, 'show'])-
 Route::post('/reset-password/{token}', [PasswordResetController::class, 'update'])->middleware('guest')->name('password.reset');
 
 Route::middleware(['auth'])->group( function() {
-    Route::get('/dashboard', function() {
-        return view('dashboard');
-    });
+    Route::get('/dashboard', [AdvertismentController::class, 'index'])->name('advertisement.dashboard');
 
     Route::resource('/advertisement', AdvertismentController::class);
 });
