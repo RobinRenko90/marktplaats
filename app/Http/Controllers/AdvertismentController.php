@@ -84,7 +84,7 @@ class AdvertismentController extends Controller
 
         $advertisement->update($validateData);
 
-        return redirect()->to('/dashboard')->with('success', 'Advertentie is aangepast');
+        return redirect()->to('/advertisement')->with('success', 'Advertentie is aangepast');
     }
 
     /**

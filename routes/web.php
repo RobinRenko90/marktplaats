@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdvertismentController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasswordForgottenController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegistrationController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -26,4 +27,6 @@ Route::middleware(['auth'])->group( function() {
     Route::get('/dashboard', [AdvertismentController::class, 'index'])->name('advertisement.dashboard');
 
     Route::resource('/advertisement', AdvertismentController::class);
+
+    Route::post('/advertisement/{advertisement}/bidding', [BiddingController::class, 'store'])->name('advertisement.bidding');
 });
