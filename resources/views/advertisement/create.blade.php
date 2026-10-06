@@ -15,6 +15,15 @@
                 <textarea class="border rounded w-full py-1 px-2" name="description" id="description" cols='5'>{{ old('description') }}</textarea>
             </div>
             <div>
+                <label class="font-bold text-xs" for="category">Categorie</label>
+                <select name="category" id="category" class="border w-full py-2 px-1 rounded">
+                    <option value="" disabled selected>Selecteer categorie</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>    
+            <div>
                 <label class="font-bold text-xs" for="price">Prijs</label>
                 <input class="border rounded w-full py-1 px-2" type="text" name="price" id="price" value="{{ old('price') }}">
             </div>

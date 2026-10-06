@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
 use App\Models\Advertisement;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 use Auth;
@@ -37,7 +38,9 @@ class AdvertismentController extends Controller
      */
     public function create()
     {
-        return view('advertisement.create');
+        return view('advertisement.create')->with([
+            'categories' => Category::all(),
+        ]);
     }
 
     /**

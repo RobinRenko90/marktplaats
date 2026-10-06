@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdvertismentController;
 use App\Http\Controllers\BiddingController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasswordForgottenController;
 use App\Http\Controllers\PasswordResetController;
@@ -27,6 +28,7 @@ Route::middleware(['auth'])->group( function() {
     Route::get('/dashboard', [AdvertismentController::class, 'index'])->name('advertisement.dashboard');
 
     Route::resource('/advertisement', AdvertismentController::class);
+    Route::resource('/categories', CategoryController::class);
 
     Route::post('/advertisement/{advertisement}/bidding', [BiddingController::class, 'store'])->name('advertisement.bidding');
 });
