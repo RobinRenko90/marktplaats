@@ -23,3 +23,11 @@
         @include('components.biddings', ['model' => $advertisement])
     </div>
 @endsection
+
+@section('extraScript')
+    <script type="text/javascript">
+        $("#offer").on("submit", function(){
+            return confirm("Weet je het zeker?");
+        });
+    </script>
+@endsection

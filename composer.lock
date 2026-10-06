@@ -6235,16 +6235,16 @@
         },
         {
             "name": "laravel/agent-detector",
-            "version": "v2.0.3",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/agent-detector.git",
-                "reference": "a190dd6b0fbc097ee909fbd59d35039bf82b4b4d"
+                "reference": "2e4f1e00f75afa82ce2ade999c6e72b3c81d03c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/agent-detector/zipball/a190dd6b0fbc097ee909fbd59d35039bf82b4b4d",
-                "reference": "a190dd6b0fbc097ee909fbd59d35039bf82b4b4d",
+                "url": "https://api.github.com/repos/laravel/agent-detector/zipball/2e4f1e00f75afa82ce2ade999c6e72b3c81d03c5",
+                "reference": "2e4f1e00f75afa82ce2ade999c6e72b3c81d03c5",
                 "shasum": ""
             },
             "require": {
@@ -6293,7 +6293,7 @@
                 "issues": "https://github.com/laravel/agent-detector/issues",
                 "source": "https://github.com/laravel/agent-detector"
             },
-            "time": "2026-09-12T16:17:12+00:00"
+            "time": "2026-10-05T14:40:01+00:00"
         },
         {
             "name": "laravel/pail",
@@ -8371,12 +8371,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.3"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }

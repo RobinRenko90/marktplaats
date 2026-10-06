@@ -5,11 +5,11 @@
     <p class="text-center">Mijn advertenties</p>
     <div class="grid items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
         <a href="{{ route('advertisement.create') }}" class="w-fit m-auto inline-block mt-5 px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">Nieuwe advertentie</a>
-        <div class="grid grid-cols-3 gap-4 py-5">
+        <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-4 py-5">
             @forelse($advertisements as $advertisement)
                 <div class="border mt-4 p-3 text-wrap w-full rounded">
                     <p class="font-bold text-md">{{ $advertisement->title }}</p>
-                    <p class="my-6">{{ $advertisement->description }}</p>
+                    <p class="my-6">{{ Str::words($advertisement->description, 25, '...') }}</p>
 
                     <i class="text-xs">prijs: €{{ $advertisement->price }}</i>
 

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegistrationRequest;
+use App\Mail\welcomeMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Mail;
+
 
 use Auth;
 
@@ -28,8 +31,13 @@ class RegistrationController extends Controller
 
         $user = User::create($validateData);
 
-        Auth::login($user);
+        Mail::raw('Welkom bij marktplaats', function ($message) {
+            $message->to('gast@test.nl')
+                    ->subject('Welkom');
+        });
 
-        return redirect('dashboard');
+        Mail::to($user->email)->send(new welcomeMail($user));
+
+        return redirect('/');
     }
 }

@@ -4,11 +4,11 @@
     @include('components.alerts')
     <p class="text-center">Overzicht advertenties</p>
     <div class="grid items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-        <div class="grid grid-cols-3 gap-4 py-5">
+        <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-4 py-5">
             @forelse($advertisements as $advertisement)
                 <div class="border mt-4 p-3 text-wrap w-full rounded">
                     <p class="font-bold text-md">{{ $advertisement->title }}</p>
-                    <p class="my-6">{{ $advertisement->description }}</p>
+                    <p class="my-6">{{ Str::words($advertisement->description, 25, '...') }}</p>
 
                     <div>
                         <i class="text-xs">prijs: €{{ $advertisement->price }}</i>
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             @empty
-                <p class="col-span-3">Er zijn nog geen advertenties geplaatst. Waar wacht je op en begin met plaatsen :D</p>
+                <p class="col-span-3">Er zijn nog geen advertenties geplaatst.</p>
             @endforelse
         </div>
     </div>
