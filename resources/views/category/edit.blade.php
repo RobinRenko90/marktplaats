@@ -13,5 +13,13 @@
             </div>
             <input type="submit" value="Categorie aanpassen" class="cursor-pointer inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
         </form>
+        <form class="mt-4" action="{{ Route('categories.destroy', $category->id) }}" method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="w-full cursor-pointer inline-block px-5 py-1.5 bg-red-400 text-white dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
+                onclick="return confirm('Weet je zeker dat je deze categorie wilt verwijderen?')">
+                Verwijderen
+            </button>
+        </form>
     </div>
 @endsection
