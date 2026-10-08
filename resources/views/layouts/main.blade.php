@@ -21,7 +21,7 @@
     <body class=" p-6 lg:p-8 min-h-screen ">
         <header class="w-full text-sm mb-6 not-has-[nav]:hidden">
             @if (Route::has('login'))
-                <nav class="flex justify-end justify-end gap-4">
+                <nav class="flex justify-end justify-end flex-col sm:flex-row gap-4">
                     @auth
                         <a
                             href="{{ url('/dashboard') }}"
@@ -46,7 +46,7 @@
 
                         <form action="{{ url('/logout') }}" method="post">
                             @csrf
-                            <input type="submit" class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
+                            <input type="submit" class="cursor-pointer text-left w-full inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
                                 value="Logout">
                         </form>
 
