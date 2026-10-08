@@ -21,19 +21,19 @@ class AdvertismentController extends Controller
         if (Route::currentRouteName() == 'advertisement.index') {
             $advertisements = Advertisement::where('user_id', Auth::user()->id);
 
-             if ($request->has('category') && !empty($request->input('category'))) {
-                $advertisements->whereHas('categories', function ($q)use($request){
-                    $q->where('name', $request->category);
-                });
-            }
-            
             return view('advertisement.index')->with([
                 'advertisements' => $advertisements->get(),
                 'categories'     => Category::get(),
             ]);
         } else {
             $advertisements = Advertisement::query();
-            
+
+            if ($request->has('category') && !empty($request->input('category'))) {
+                $advertisements->whereHas('categories', function ($q)use($request){
+                    $q->where('name', $request->category);
+                });
+            }
+
             return view('dashboard')->with([
                 'advertisements' => $advertisements->get(),
                 'categories'     => Category::get(),
