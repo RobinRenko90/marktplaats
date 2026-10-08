@@ -18,6 +18,7 @@ class UpdateAdvertisementRequest extends FormRequest
             'title'         => 'required',
             'description'   => 'required',
             'price'         => 'required',
+            'category'      => 'nullable',
         ];
     }
 }

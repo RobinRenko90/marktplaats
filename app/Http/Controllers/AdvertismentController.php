@@ -57,6 +57,8 @@ class AdvertismentController extends Controller
             'user_id'       => Auth::user()->id,
         ]);
 
+        $syncCategory = $advertisement->categories()->sync($validateData['category']);
+
         return redirect()->to('/dashboard')->with('success', 'Advertentie is aangemaakt');
     }
 
@@ -75,7 +77,10 @@ class AdvertismentController extends Controller
     {
         $advertisement = Advertisement::findOrFail($id);
 
-        return view('advertisement.edit', compact('advertisement'));
+        return view('advertisement.edit', compact('advertisement'))->with([
+            'categories' => Category::all(),
+            'selectedCategory' => $advertisement->categories->first(),
+        ]);
     }
 
     /**
@@ -86,6 +91,8 @@ class AdvertismentController extends Controller
         $validateData = $request->validated();
 
         $advertisement->update($validateData);
+        
+        $syncCategory = $advertisement->categories()->sync($validateData['category']);
 
         return redirect()->to('/advertisement')->with('success', 'Advertentie is aangepast');
     }

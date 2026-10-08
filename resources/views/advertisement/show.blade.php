@@ -1,14 +1,23 @@
 @extends('layouts.main')
 
 @section('content')
-    <p class="text-center text-xl mb-5">{{ $advertisement->title }}</p>
+
+    <div class="flex justify-center mb-4 gap-5">
+        <p class="text-center text-xl mb-5">{{ $advertisement->title }}</p>
+        @if(count($advertisement->categories))
+            <div>
+                @foreach($advertisement->categories as $category)
+                    <span class="bg-amber-400 w-fit rounded-full px-3 py-1 text-white text-xs">{{ $category->name }}</span>
+                @endforeach
+            </div>
+        @endif()    
+    </div>
+
     @include('components.alerts')
     <div class="flex justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
         <div class="grid w-150 gap-4">
             <div>
-                <p>{{ $advertisement->title }}</p>
-
-                <p class="mt-2">{{ $advertisement->description }}</p>
+                <p class="">{{ $advertisement->description }}</p>
 
                 <p class="mt-5">Prijs: €{{ $advertisement->price }}</p>
             </div>

@@ -23,4 +23,8 @@ class Advertisement extends Model
     public function biddings():BelongsToMany {
         return $this->belongsToMany(Bidding::class, 'advertisement_biddings', 'advertisement_id', 'bidding_id');
     }
+
+    public function categories():BelongsToMany {
+        return $this->belongsToMany(category::class, 'advertisement_categories', 'advertisement_id', 'category_id');
+    }
 }
