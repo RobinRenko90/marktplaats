@@ -34,8 +34,14 @@ class AdvertismentController extends Controller
                 });
             }
 
+            if ($request->has('search') && !empty($request->input('search'))) {
+                $search = $request->input('search');
+                $advertisements->where('title', 'like', "%$search%")
+                ->orWhere('description', 'like', "%$search%")->get();
+            }
+
             return view('dashboard')->with([
-                'advertisements' => $advertisements->get(),
+                'advertisements' => $advertisements->paginate(2),
                 'categories'     => Category::get(),
             ]);
         }
@@ -113,5 +119,15 @@ class AdvertismentController extends Controller
         $advertisement->delete();
 
         return redirect()->to( Route('advertisement.index') )->with('success', 'De advertentie is succesvol verwijderd.');
+    }
+
+    public function search(Request $request){
+        $search = $request->input('search');
+        $advertisements = Advertisement::where('title', 'like', "%$search%");
+
+        return view('dashboard')->with([
+            'advertisements' => $advertisements->paginate(2),
+            'categories'     => Category::get(),
+        ]);
     }
 }

@@ -6,7 +6,7 @@
         <div class="sm:-ml-5 flex flex-col pr-5 mb-5">
             <strong>Filter op:</strong>
             @if($categories)
-                <form action="/dashboard" method="GET">
+                <form class="mb-6" action="/dashboard" method="GET">
                     <ul>
                     @foreach($categories as $category)
                         <li>
@@ -24,6 +24,10 @@
                     <input class="bg-gray-300 p-1 mt-3 w-full rounded cursor-pointer" type="submit" value="filter">
                 </form>
             @endif
+            <form action="/dashboard" method="GET">
+                <input type="text" name="search" id="search" class="px-1 border rounded w-full" placeholder="zoeken op....">
+                <input class="w-full mt-3 cursor-pointer inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal" type="submit" value="Zoek">
+            </form>
         </div>
         <div class="sm:col-span-7">
 
@@ -52,6 +56,7 @@
                         <p class="col-span-3">Er zijn nog geen advertenties geplaatst.</p>
                     @endforelse
                 </div>
+                {{ $advertisements->links() }}
             </div>
         </div>
     </div>        

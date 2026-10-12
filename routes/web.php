@@ -27,8 +27,10 @@ Route::post('/reset-password/{token}', [PasswordResetController::class, 'update'
 Route::middleware(['auth'])->group( function() {
     Route::get('/dashboard', [AdvertismentController::class, 'index'])->name('advertisement.dashboard');
 
-    Route::resource('/advertisement', AdvertismentController::class);
-    Route::resource('/categories', CategoryController::class);
+    Route::resource('/advertisement', AdvertismentController::class)
+     ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+    Route::resource('/categories', CategoryController::class)
+     ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 
     Route::post('/advertisement/{advertisement}/bidding', [BiddingController::class, 'store'])->name('advertisement.bidding');
 });
