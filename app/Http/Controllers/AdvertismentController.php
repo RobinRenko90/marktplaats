@@ -22,26 +22,29 @@ class AdvertismentController extends Controller
             $advertisements = Advertisement::where('user_id', Auth::user()->id);
 
             return view('advertisement.index')->with([
-                'advertisements' => $advertisements->get(),
+                'advertisements' => $advertisements->orderBy('premium', 'desc')->latest('created_at', 'desc')->get(),
                 'categories'     => Category::get(),
             ]);
         } else {
             $advertisements = Advertisement::query();
 
-            if ($request->has('category') && !empty($request->input('category'))) {
+            if ($request->filled('category')) {
                 $advertisements->whereHas('categories', function ($q)use($request){
-                    $q->where('name', $request->category);
+                    $q->where('name', $request->input('category'));
                 });
             }
 
-            if ($request->has('search') && !empty($request->input('search'))) {
+            if ($request->filled('search')) {
                 $search = $request->input('search');
-                $advertisements->where('title', 'like', "%$search%")
-                ->orWhere('description', 'like', "%$search%")->get();
+
+                $advertisements->where(function ($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%");
+                });
             }
 
             return view('dashboard')->with([
-                'advertisements' => $advertisements->paginate(2),
+                'advertisements' => $advertisements->orderBy('premium', 'desc')->latest('created_at', 'desc')->paginate(10)->withQueryString(),
                 'categories'     => Category::get(),
             ]);
         }
@@ -91,6 +94,10 @@ class AdvertismentController extends Controller
     {
         $advertisement = Advertisement::findOrFail($id);
 
+        if (Auth::user()->cannot('update', $advertisement)) {
+            abort(403,'Je hebt geen recht om deze advertentie aan te passen...');
+        }
+
         return view('advertisement.edit', compact('advertisement'))->with([
             'categories' => Category::all(),
             'selectedCategory' => $advertisement->categories->first(),
@@ -102,6 +109,10 @@ class AdvertismentController extends Controller
      */
     public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement)
     {
+        if (Auth::user()->cannot('update', $advertisement)) {
+            abort(403,'Je hebt geen recht om deze advertentie aan te passen...');
+        }
+
         $validateData = $request->validated();
 
         $advertisement->update($validateData);
@@ -116,6 +127,10 @@ class AdvertismentController extends Controller
      */
     public function destroy(Advertisement $advertisement)
     {
+        if (Auth::user()->cannot('delete', $advertisement)) {
+            abort(403,'Je hebt geen recht om deze advertentie te verwijderen...');
+        }
+
         $advertisement->delete();
 
         return redirect()->to( Route('advertisement.index') )->with('success', 'De advertentie is succesvol verwijderd.');
@@ -129,5 +144,18 @@ class AdvertismentController extends Controller
             'advertisements' => $advertisements->paginate(2),
             'categories'     => Category::get(),
         ]);
+    }
+
+    public function promote(Advertisement $advertisement){
+        return view('settings.promote', compact('advertisement'));
+    }
+
+    public function postPromote(Request $request, Advertisement $advertisement)
+    {
+        $advertisement->update([
+            'premium' => true,
+        ]);
+
+        return redirect('/dashboard');
     }
 }

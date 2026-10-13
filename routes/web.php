@@ -29,6 +29,11 @@ Route::middleware(['auth'])->group( function() {
 
     Route::resource('/advertisement', AdvertismentController::class)
      ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+    
+    Route::get('/advertisement/{advertisement}/promote', [AdvertismentController::class, 'promote'])->name('advertisement.promote');
+    Route::post('/advertisement/{advertisement}/promote', [AdvertismentController::class, 'postPromote'])->name('advertisement.promote.post');
+
+
     Route::resource('/categories', CategoryController::class)
      ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 

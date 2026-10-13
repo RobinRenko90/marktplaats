@@ -4,16 +4,23 @@ namespace App\Models;
 
 use App\Models\Bidding;
 use App\Models\User;
+use App\Policies\AdvertisementPolicy;
+use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+#[UsePolicy(AdvertisementPolicy::class)]
 class Advertisement extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'price', 'paid', 'user_id'];
+    protected $fillable = ['title', 'description', 'price', 'paid', 'user_id', 'premium'];
+
+    protected $casts = [
+        'premium' => 'boolean',
+    ];
 
     public function user(): HasOne
     {
