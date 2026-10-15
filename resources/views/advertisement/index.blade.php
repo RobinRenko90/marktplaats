@@ -17,6 +17,8 @@
                         </svg>
                         @endif
                     </p>
+                    <i class="text-xs">Geplaatst op: {{ $advertisement->created_at }}</i>    
+
                     <p class="my-6">{{ Str::words($advertisement->description, 25, '...') }}</p>
 
                     <div>

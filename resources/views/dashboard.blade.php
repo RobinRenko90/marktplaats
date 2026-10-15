@@ -45,11 +45,12 @@
                                 </svg>
                                 @endif
                             </p>
+                            <i class="text-xs">Geplaatst op: {{ $advertisement->created_at }}</i>
+
                             <p class="my-6">{{ Str::words($advertisement->description, 25, '...') }}</p>
 
                             <div>
                                 <i class="text-xs">prijs: €{{ $advertisement->price }}</i>
-
                                 <a href="{{ route('advertisement.show', $advertisement->id) }}" class="float-right">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                                         <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />

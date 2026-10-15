@@ -1,4 +1,4 @@
-<div class="ml-10">
+<div class="mt-5 md:mt-0 md:ml-10">
     <strong>Biedingen:</strong>
     <ul style="list-style: disc;" class="ml-4">
         @foreach($model->biddings as $bidding)

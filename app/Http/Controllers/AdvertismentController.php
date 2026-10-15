@@ -158,4 +158,11 @@ class AdvertismentController extends Controller
 
         return redirect('/dashboard');
     }
+
+    public function contact(Request $request, Advertisement $advertisement){
+        // dd($advertisement->user->email);
+        //send mail to user of the advertisement
+
+        return redirect()->back()->with('success', 'Een notificatie/mail is naar de verkoper verstuurd');
+    }
 }

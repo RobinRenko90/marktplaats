@@ -2,6 +2,8 @@
 
 @section('content')
 
+    @include('components.alerts')
+
     <div class="flex justify-center mb-4 gap-5 ">
         <p class="text-center text-xl mb-5 ">{{ $advertisement->title }}
              @if($advertisement->premium == 1)
@@ -19,9 +21,8 @@
         @endif()    
     </div>
 
-    @include('components.alerts')
-    <div class="flex justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-        <div class="grid w-150 gap-4">
+    <div class="flex flex-col md:flex-row justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
+        <div class="flex flex-col justify-between md:w-150 gap-4">
             <div>
                 <p class="">{{ $advertisement->description }}</p>
 
@@ -41,8 +42,19 @@
                     @endif
                 </div>
             @endcan
+            @cannot('update', $advertisement)            
+                <div>
+                    <form action="{{ route('advertisement.contact', $advertisement) }}" method="post">
+                        <label for="contact_content" class="font-bold">Contact:</label>
+                        <textarea class="border rounded w-full p-1" style="resize:none;" name="contact_content" id="contact_content" rows="6"></textarea>
+                        <input type="submit" id="contact" class="w-fit mt-3 cursor-pointer inline-block px-5 py-1.5 bg-blue-500 text-white rounded-sm text-sm leading-normal" value="Neem contact op">
+                    </form>
+                </div>
+            @endCannot
         </div>
-        @include('components.biddings', ['model' => $advertisement])
+        <div>
+            @include('components.biddings', ['model' => $advertisement])
+        </div>
     </div>
 @endsection
 
@@ -51,5 +63,6 @@
         $("#offer").on("submit", function(){
             return confirm("Weet je het zeker?");
         });
+
     </script>
 @endsection

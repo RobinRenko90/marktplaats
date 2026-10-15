@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group( function() {
     
     Route::get('/advertisement/{advertisement}/promote', [AdvertismentController::class, 'promote'])->name('advertisement.promote');
     Route::post('/advertisement/{advertisement}/promote', [AdvertismentController::class, 'postPromote'])->name('advertisement.promote.post');
+    Route::post('/advertisement/{advertisement}/contact', [AdvertismentController::class, 'contact'])->name('advertisement.contact');
 
 
     Route::resource('/categories', CategoryController::class)
