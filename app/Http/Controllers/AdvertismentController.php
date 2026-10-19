@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAdvertisementRequest;
 use App\Http\Requests\UpdateAdvertisementRequest;
+use App\Mail\AdvertisementReply;
 use App\Models\Advertisement;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 use Auth;
 use Route;
@@ -160,8 +162,10 @@ class AdvertismentController extends Controller
     }
 
     public function contact(Request $request, Advertisement $advertisement){
-        // dd($advertisement->user->email);
+  
         //send mail to user of the advertisement
+        Mail::to($advertisement->user->email)
+            ->send(new AdvertisementReply($advertisement, $request->contact_content, Auth::user()));
 
         return redirect()->back()->with('success', 'Een notificatie/mail is naar de verkoper verstuurd');
     }
