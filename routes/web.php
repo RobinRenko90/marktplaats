@@ -4,6 +4,7 @@ use App\Http\Controllers\AdvertismentController;
 use App\Http\Controllers\BiddingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PasswordForgottenController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegistrationController;
@@ -36,7 +37,13 @@ Route::middleware(['auth'])->group( function() {
     Route::post('/advertisement/{advertisement}/contact', [AdvertismentController::class, 'contact'])->name('advertisement.contact');
 
     Route::get('/profile', [SettingController::class, 'profile'])->name('setting.profile');
-    Route::post('/profile', [SettingController::class, 'updateProfile'])->name('setting.update-profile');
+    Route::patch('/profile/{user}', [SettingController::class, 'updateProfile'])->name('setting.update-profile');
+
+    Route::get('/messageboxes', [MessageController::class, 'index'])->name('message.index');
+    Route::get('/profile/{user}/message', [MessageController::class, 'create'])->name('message.create');
+    Route::post('/profile/{user}/message', [MessageController::class, 'store'])->name('message.store');
+    Route::get('/messagebox/{id}', [MessageController::class, 'show'])->name('messagebox.show');
+    Route::post('/messagebox/{id}/message', [MessageController::class, 'newMessage'])->name('new.message');
 
     Route::resource('/categories', CategoryController::class)
      ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);

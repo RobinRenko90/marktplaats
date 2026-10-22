@@ -6,7 +6,7 @@
     <div class="grid items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
         <form class="grid w-150 gap-4" action="{{ route('advertisement.update', $advertisement->id) }}" method="post">
             @csrf
-            @method('patch')
+            @method('PATCH')
             <div>
                 <label class="font-bold text-xs" for="title">Titel</label>
                 <input class="border rounded w-full py-1 px-2" type="text" name="title" id="title" value="{{ old('title', $advertisement->title) }}">

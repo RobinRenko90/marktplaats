@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 use Auth;
 class UpdateProfileRequest extends FormRequest
@@ -12,9 +13,7 @@ class UpdateProfileRequest extends FormRequest
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
-    {
-        dd($this->request->email);
-        dd(Auth::user());
+    {   
         return true;
     }
 
@@ -26,7 +25,10 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'email'         => 'required|email|unique:users,email,'.$this->user->id,
+            'notification'  => 'nullable',
         ];
     }
 }

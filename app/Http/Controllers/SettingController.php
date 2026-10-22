@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProfileRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use Auth;
@@ -15,7 +16,13 @@ class SettingController extends Controller
         return view('settings.profile', compact('user'));
     }
 
-    public function updateProfile(UpdateProfileRequest $request){
-        dd('hello');
+    public function updateProfile(UpdateProfileRequest $request, User $user){
+        $validateData = $request->validated();
+
+        $validateData['notification'] = $request->get('notification') == 'on' ? 1 : 0;
+
+        $user->update($validateData);
+
+        return redirect()->back()->with('success', 'Gegevens zijn aangepast');
     }
 }
