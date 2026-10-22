@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasswordForgottenController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,6 +35,8 @@ Route::middleware(['auth'])->group( function() {
     Route::post('/advertisement/{advertisement}/promote', [AdvertismentController::class, 'postPromote'])->name('advertisement.promote.post');
     Route::post('/advertisement/{advertisement}/contact', [AdvertismentController::class, 'contact'])->name('advertisement.contact');
 
+    Route::get('/profile', [SettingController::class, 'profile'])->name('setting.profile');
+    Route::post('/profile', [SettingController::class, 'updateProfile'])->name('setting.update-profile');
 
     Route::resource('/categories', CategoryController::class)
      ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
