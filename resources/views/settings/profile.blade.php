@@ -5,6 +5,7 @@
         @include('components.alerts')
         <form class="flex flex-col" action="{{ route('setting.update-profile', $user) }}" method="post">
             @csrf
+            @method('PATCH')
             <label for="first_name"><b>Voornaam</b></label>
             <input class="border rounded mb-3 px-2 py-1" type="text" name="first_name" id="first_name" value="{{ $user->first_name }}">
             <label for="last_name"><b>Achternaam</b></label>
