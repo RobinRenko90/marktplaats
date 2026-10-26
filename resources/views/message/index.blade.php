@@ -3,13 +3,15 @@
 @section('content')
     <div class="grid">
     @forelse($messageboxes as $messagebox)
-        <a href="{{ route('messagebox.show', $messagebox->id) }}">
             @if($messagebox->seller == Auth::user())
-                {{ $messagebox->interested->fullName }}
+                <a href="{{ route('message.show', $messagebox->interested->slug. '-' . $messagebox->interested->id) }}">
+                    {{ $messagebox->interested->fullName }}
+                </a>
             @else
-                {{ $messagebox->seller->fullName }}
+                <a href="{{ route('message.show', $messagebox->seller->slug. '-' . $messagebox->seller->id) }}">
+                    {{ $messagebox->seller->fullName }}
+                </a>
             @endif
-        </a>
     @empty
     </div>
     @endforelse

@@ -42,15 +42,6 @@
                     @endif
                 </div>
             @endcan
-            @cannot('update', $advertisement)            
-                <div>
-                    <form action="{{ route('advertisement.contact', $advertisement) }}" method="post">
-                        <label for="contact_content" class="font-bold">Contact:</label>
-                        <textarea class="border rounded w-full py-1 px-2" style="resize:none;" name="contact_content" id="contact_content" rows="6"></textarea>
-                        <input type="submit" id="contact" class="w-fit mt-3 cursor-pointer inline-block px-5 py-1.5 bg-blue-500 text-white rounded-sm text-sm leading-normal" value="Neem contact op">
-                    </form>
-                </div>
-            @endCannot
         </div>
         <div>
             @include('components.biddings', ['model' => $advertisement])

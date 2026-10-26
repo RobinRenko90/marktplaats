@@ -39,11 +39,10 @@ Route::middleware(['auth'])->group( function() {
     Route::get('/profile', [SettingController::class, 'profile'])->name('setting.profile');
     Route::patch('/profile/{user}', [SettingController::class, 'updateProfile'])->name('setting.update-profile');
 
-    Route::get('/messageboxes', [MessageController::class, 'index'])->name('message.index');
-    Route::get('/profile/{user}/message', [MessageController::class, 'create'])->name('message.create');
-    Route::post('/profile/{user}/message', [MessageController::class, 'store'])->name('message.store');
-    Route::get('/messagebox/{id}', [MessageController::class, 'show'])->name('messagebox.show');
-    Route::post('/messagebox/{id}/message', [MessageController::class, 'newMessage'])->name('new.message');
+    Route::get('/profile/messages', [MessageController::class, 'index'])->name('message.index');
+    Route::get('/profile/messages/{user}', [MessageController::class, 'show'])->name('message.show');
+    Route::post('/profile/messages/{user}', [MessageController::class, 'store'])->name('message.store');
+    Route::post('/profile/messages/{uuid}/message', [MessageController::class, 'newMessage'])->name('new.message');
 
     Route::resource('/categories', CategoryController::class)
      ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);

@@ -2,14 +2,19 @@
 
 @section('content')
     <div class="mb-5 grid gap-4">
-        @foreach($messageBox->messages as $message)
-            <p @if($message->user_id !== Auth::user()->id) class='text-right' @else class='text-left' @endif>
-                {{ $message->content }}<br>
-                <span class="text-xs">{{ $message->created_at }}</span>
-            </p>
-        @endforeach
+        @if($messageBox)
+            @foreach($messageBox->messages as $message)
+                <p @if($message->user_id !== Auth::user()->id) class='text-right' @else class='text-left' @endif>
+                    {{ $message->content }}<br>
+                    <span class="text-xs">{{ $message->created_at }}</span>
+                </p>
+            @endforeach
+        @endif
     </div>
-    <form class="flex flex-wrap justify-center" action="{{ route('new.message', $messageBox->id) }}" method="post">
+
+    <form class="flex flex-wrap justify-center" action="{{ 
+        $messageBox ? route('new.message', $messageBox->uuid) : route('message.store', $advertiser) 
+    }}" method="post">
         @csrf
             <div class="w-full">
                 <input class="border w-8/10 md:w-9/10 p-1 px-2 rounded-l-md" type="text" name="content" id="content" placeholder="....">

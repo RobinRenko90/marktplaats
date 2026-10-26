@@ -21,29 +21,43 @@ class MessageController extends Controller
         return view('message.index', compact('messageboxes'));
     }
 
-    public function create(){
-        return view ('message.create');
-    }
+    public function store(MessageRequest $request,User $user){
 
-    public function store(Request $request,User $user){
         $messageBox = MessageBox::create([
             'seller_id'     => $user->id,
             'interested_id' => Auth::user()->id,
         ]);
+
+        $message = Message::Create([
+            'message_box_uuid'    => $messageBox->uuid,
+            'user_id'           => Auth::user()->id,
+            'content'           => $request->content,
+        ]);
+
+        return view ('message.show', compact('messageBox', 'advertiser'));
+
     }
 
-    public function show($id){
-        $messageBox = Messagebox::where('id', $id)
-            ->with('messages')
-            ->first();
+    public function show($user){
 
-        return view ('message.show', compact('messageBox'));
+        $userId = last(explode('-', $user));
+
+        $advertiser = User::findOrFail($userId);
+
+        $currentUserId = Auth::id();
+
+        $messageBox = MessageBox::where(function ($query) use ($currentUserId, $advertiser) {
+            $query->where('seller_id', min($currentUserId, $advertiser->id))
+                  ->where('interested_id', max($currentUserId, $advertiser->id));
+        })->first();
+
+        return view ('message.show', compact('messageBox', 'advertiser'));
     }
 
-    public function newMessage(MessageRequest $request, $id)
+    public function newMessage(MessageRequest $request, $uuid)
     {   
         $message = Message::Create([
-            'message_box_id'    => $id,
+            'message_box_uuid'  => $uuid,
             'user_id'           => Auth::user()->id,
             'content'           => $request->content,
         ]);

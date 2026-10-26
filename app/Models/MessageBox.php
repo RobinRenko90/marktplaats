@@ -33,6 +33,6 @@ class MessageBox extends Model
 
     public function messages(): HasMany
     {
-        return $this->hasMany(Message::class, 'message_box_id', 'id')->orderBy('created_at');
+        return $this->hasMany(Message::class, 'message_box_uuid', 'uuid')->orderBy('created_at');
     }
 }

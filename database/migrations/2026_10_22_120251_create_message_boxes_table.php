@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('message_boxes', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('seller_id');
             $table->unsignedBigInteger('interested_id');
             $table->timestamps();
