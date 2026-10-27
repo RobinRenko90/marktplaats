@@ -1,6 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
+    <div class="flex justify-between flex-col md:flex-row mb-5">
+        <p class="text-center text-xl">Mijn berichten</p>
+    </div>
     <div class="grid">
         @forelse($inboxes as $inbox)
 
