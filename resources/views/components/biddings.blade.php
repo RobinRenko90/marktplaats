@@ -16,6 +16,6 @@
                 class="w-full mt-3 cursor-pointer inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
             >
         </form>
-        <a href="{{ route('message.show', ['user' => $model->user->slug . '-' . $model->user->id]) }}" class="w-full mt-3 text-center cursor-pointer inline-block px-5 py-1.5 bg-blue-500 text-white rounded-sm text-sm leading-normal">Bericht sturen</a>
+        <a href="{{ route('message.show', ['user' => $model->user->slug]) }}" class="w-full mt-3 text-center cursor-pointer inline-block px-5 py-1.5 bg-blue-500 text-white rounded-sm text-sm leading-normal">Bericht sturen</a>
     @endif
 </div>

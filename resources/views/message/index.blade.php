@@ -2,17 +2,30 @@
 
 @section('content')
     <div class="grid">
-    @forelse($messageboxes as $messagebox)
-            @if($messagebox->seller == Auth::user())
-                <a href="{{ route('message.show', $messagebox->interested->slug. '-' . $messagebox->interested->id) }}">
-                    {{ $messagebox->interested->fullName }}
-                </a>
-            @else
-                <a href="{{ route('message.show', $messagebox->seller->slug. '-' . $messagebox->seller->id) }}">
-                    {{ $messagebox->seller->fullName }}
-                </a>
-            @endif
-    @empty
+        @forelse($inboxes as $inbox)
+
+            @php
+                $otherUser = $inbox->customer_id === Auth::id()
+                    ? $inbox->seller
+                    : $inbox->customer;
+            @endphp
+
+            <a href="{{ route('message.show', $otherUser->slug) }}">
+                {{ $otherUser->fullName }}
+            </a>
+
+
+                {{-- @if($inbox->customer->id == Auth::user()->id)
+                    <a href="{{ route('message.show', $inbox->seller->slug) }}">
+                        {{ $inbox->seller->fullName }}
+                    </a>
+                @else
+                    <a href="{{ route('message.show', $inbox->customer->slug) }}">
+                        {{ $inbox->customer->fullName }}
+                    </a>
+                @endif --}}
+        @empty
+
+        @endforelse
     </div>
-    @endforelse
 @endsection

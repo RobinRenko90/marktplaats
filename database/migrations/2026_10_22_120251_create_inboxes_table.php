@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('message_boxes', function (Blueprint $table) {
+        Schema::create('inboxes', function (Blueprint $table) {
             $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('seller_id');
-            $table->unsignedBigInteger('interested_id');
+            $table->unsignedBigInteger('customer_id');
             $table->timestamps();
 
             $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('interested_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('message_boxes');
+        Schema::dropIfExists('inboxes');
     }
 };

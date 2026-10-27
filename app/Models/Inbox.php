@@ -12,12 +12,11 @@ use App\Models\Message;
 use App\Models\User;
 
 #[Table(key: 'uuid', keyType: 'string', incrementing: false)]
-class MessageBox extends Model
+class Inbox extends Model
 {
     use HasUuids;
 
-    protected $table="message_boxes";
-    protected $fillable = ['seller_id', 'interested_id'];
+    protected $fillable = ['seller_id', 'customer_id'];
 
     public $incrementing = false;
 
@@ -26,13 +25,13 @@ class MessageBox extends Model
         return $this->hasOne(User::class, 'id', 'seller_id');
     }
 
-    public function interested(): HasOne
+    public function customer(): HasOne
     {
-        return $this->hasOne(User::class, 'id', 'interested_id');
+        return $this->hasOne(User::class, 'id', 'customer_id');
     }
 
     public function messages(): HasMany
     {
-        return $this->hasMany(Message::class, 'message_box_uuid', 'uuid')->orderBy('created_at');
+        return $this->hasMany(Message::class, 'inbox_uuid', 'uuid')->orderBy('created_at');
     }
 }

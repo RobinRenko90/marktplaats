@@ -41,6 +41,6 @@ class User extends Authenticatable
     }
 
     public function getSlugAttribute() {
-        return Str::slug($this->first_name . ' ' . $this->last_name);
+        return Str::slug($this->first_name. ' ' .$this->last_name. ' ' .$this->id);
     }
 }

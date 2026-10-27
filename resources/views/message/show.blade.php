@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="mb-5 grid gap-4">
-        @if($messageBox)
-            @foreach($messageBox->messages as $message)
+        @if($inbox)
+            @foreach($inbox->messages as $message)
                 <p @if($message->user_id !== Auth::user()->id) class='text-right' @else class='text-left' @endif>
                     {{ $message->content }}<br>
                     <span class="text-xs">{{ $message->created_at }}</span>
@@ -12,8 +12,10 @@
         @endif
     </div>
 
-    <form class="flex flex-wrap justify-center" action="{{ 
-        $messageBox ? route('new.message', $messageBox->uuid) : route('message.store', $advertiser) 
+
+    <form class="flex flex-wrap justify-center" action="{{ $inbox 
+    ? route('new.message', ['user' => $advertiser->slug, 'uuid' => $inbox->uuid]) 
+    : route('message.store', ['user' => $advertiser->slug]) 
     }}" method="post">
         @csrf
             <div class="w-full">

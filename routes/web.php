@@ -27,7 +27,7 @@ Route::get('/reset-password/{token}', [PasswordResetController::class, 'show'])-
 Route::post('/reset-password/{token}', [PasswordResetController::class, 'update'])->middleware('guest')->name('password.reset');
 
 Route::middleware(['auth'])->group( function() {
-    Route::get('/dashboard', [AdvertismentController::class, 'index'])->name('advertisement.dashboard');
+    Route::get('/dashboard', [AdvertismentController::class, 'index'])->name('dashboard');
 
     Route::resource('/advertisement', AdvertismentController::class)
      ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
@@ -41,8 +41,8 @@ Route::middleware(['auth'])->group( function() {
 
     Route::get('/profile/messages', [MessageController::class, 'index'])->name('message.index');
     Route::get('/profile/messages/{user}', [MessageController::class, 'show'])->name('message.show');
-    Route::post('/profile/messages/{user}', [MessageController::class, 'store'])->name('message.store');
-    Route::post('/profile/messages/{uuid}/message', [MessageController::class, 'newMessage'])->name('new.message');
+    Route::post('/profile/messages/{slug}', [MessageController::class, 'store'])->name('message.store');
+    Route::post('/profile/messages/{user}/{uuid}', [MessageController::class, 'newMessage'])->name('new.message');
 
     Route::resource('/categories', CategoryController::class)
      ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);

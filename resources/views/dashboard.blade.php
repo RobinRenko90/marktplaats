@@ -12,7 +12,7 @@
                         <li>
                             <input 
                             class="mr-2" 
-                            type="checkbox" 
+                            type="radio" 
                             name="category" 
                             id="category-{{ $category->id }}"
                             value="{{ $category->name }}"
@@ -28,6 +28,7 @@
                 <input type="text" name="search" id="search" class="px-1 border rounded w-full" placeholder="zoeken op....">
                 <input class="w-full mt-3 cursor-pointer inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal" type="submit" value="Zoek">
             </form>
+            <a href="{{ route('dashboard') }}" class="w-full text-center mt-3 cursor-pointer inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">Reset filter</a>
         </div>
         <div class="sm:col-span-7">
 
