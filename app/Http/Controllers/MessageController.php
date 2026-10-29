@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MessageRequest;
 
+use App\Mail\AdvertisementReply;
 use App\Models\Message;
 use App\Models\Inbox;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 
@@ -38,7 +40,7 @@ class MessageController extends Controller
             'user_id'       => Auth::user()->id,
             'content'       => $request->content,
         ]);
-
+        
         return Redirect::route('message.show', $user);
     }
 
@@ -60,11 +62,19 @@ class MessageController extends Controller
 
     public function newMessage(MessageRequest $request, $user, string $uuid)
     {   
+        $userId = last(explode('-', $user));
+        $contact = User::findOrFail($userId);
+
         $message = Message::Create([
             'inbox_uuid'  => $uuid,
             'user_id'     => Auth::user()->id,
             'content'     => $request->content,
         ]);
+
+        if ($contact->notification == 0) {
+            Mail::to($contact->email)
+                ->send(new AdvertisementReply($contact, $message->content, Auth::user()));        
+        }
 
         return Redirect::route('message.show', $user);
     }

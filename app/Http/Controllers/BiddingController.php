@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BiddingRequest;
 use App\Models\Advertisement;
 use App\Models\Bidding;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+
 
 use Auth;
 
@@ -20,6 +23,6 @@ class BiddingController extends Controller
 
         $syncBidding = $advertisement->biddings()->syncWithoutDetaching($bidding->id);
 
-        return redirect()->to( Route('advertisement.show', $advertisement) );
+        return Redirect::route('advertisement.show', $advertisement);
     }
 }

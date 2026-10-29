@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 use Auth;
 
@@ -23,6 +24,6 @@ class SettingController extends Controller
 
         $user->update($validateData);
 
-        return redirect()->back()->with('success', 'Gegevens zijn aangepast');
+        return Redirect::route('setting.profile')->with('success', 'Gegevens zijn aangepast');
     }
 }

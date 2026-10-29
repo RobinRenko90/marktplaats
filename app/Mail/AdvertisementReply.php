@@ -20,7 +20,7 @@ class AdvertisementReply extends Mailable
      * Create a new message instance.
      */
     public function __construct(
-        public Advertisement $advertisement,
+        public $contact,
         public $content,
         public $sender,
     ) {}
@@ -33,9 +33,9 @@ class AdvertisementReply extends Mailable
         return new Envelope(
             from: new Address($this->sender->email, $this->sender->fullName),
             replyTo: [
-                new Address($this->advertisement->user->email, $this->advertisement->user->fullName),
+                new Address($this->contact->email, $this->contact->fullName),
             ],
-            subject: 'Je hebt een reactie op een advertentie ontvangen',
+            subject: 'Je hebt een bericht ontvangen',
         );
     }
 

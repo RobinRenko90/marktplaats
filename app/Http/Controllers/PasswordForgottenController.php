@@ -22,7 +22,7 @@ class PasswordForgottenController extends Controller
         );
 
         return $status === Password::ResetLinkSent
-            ? back()->with(['status' => $status])
+            ? back()->with(['success' => 'Een wachtwoordwijziging is aangevraagd, controleer jouw mail.'])
             : back()->withErrors(['email' => $status]);
     }
 }

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
+
 
 class CategoryController extends Controller
 {
@@ -37,15 +41,7 @@ class CategoryController extends Controller
 
         $category = Category::create($validated);
 
-        return redirect('/categories')->with('success', 'Categorie is aangemaakt');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return Redirect::route('categories.index')->with('success', 'Categorie is aangemaakt');
     }
 
     /**
@@ -67,7 +63,7 @@ class CategoryController extends Controller
 
         $category->update($validated);
 
-        return redirect('/categories')->with('success', 'Categorie is aangepast');    
+       return Redirect::route('categories.index')->with('success', 'Categorie is aangepast');    
     }
 
     /**
@@ -77,6 +73,6 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return redirect('/categories')->with('success', 'Categorie is verwijderd');    
+        return Redirect::route('categories.index')->with('success', 'Categorie is verwijderd');    
     }
 }

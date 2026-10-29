@@ -7,8 +7,11 @@ use App\Http\Requests\UpdateAdvertisementRequest;
 use App\Mail\AdvertisementReply;
 use App\Models\Advertisement;
 use App\Models\Category;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+;
 
 use Auth;
 use Route;
@@ -78,7 +81,7 @@ class AdvertismentController extends Controller
 
         $syncCategory = $advertisement->categories()->sync($validateData['category']);
 
-        return redirect()->to('/dashboard')->with('success', 'Advertentie is aangemaakt');
+        return Redirect::route('dashboard')->with('success', 'Advertentie is aangemaakt');
     }
 
     /**
@@ -121,7 +124,7 @@ class AdvertismentController extends Controller
         
         $syncCategory = $advertisement->categories()->sync($validateData['category']);
 
-        return redirect()->to('/advertisement')->with('success', 'Advertentie is aangepast');
+        return Redirect::route('advertisement.show', $advertisement->id)->with('success', 'Advertentie is aangepast');
     }
 
     /**
@@ -135,7 +138,7 @@ class AdvertismentController extends Controller
 
         $advertisement->delete();
 
-        return redirect()->to( Route('advertisement.index') )->with('success', 'De advertentie is succesvol verwijderd.');
+        return Redirect::route('advertisement.index')->with('success', 'De advertentie is succesvol verwijderd.');
     }
 
     public function search(Request $request){
@@ -158,15 +161,6 @@ class AdvertismentController extends Controller
             'premium' => true,
         ]);
 
-        return redirect('/dashboard');
-    }
-
-    public function contact(Request $request, Advertisement $advertisement){
-  
-        //send mail to user of the advertisement
-        Mail::to($advertisement->user->email)
-            ->send(new AdvertisementReply($advertisement, $request->contact_content, Auth::user()));
-
-        return redirect()->back()->with('success', 'Een notificatie/mail is naar de verkoper verstuurd');
+        return Redirect::route('dashboard');
     }
 }

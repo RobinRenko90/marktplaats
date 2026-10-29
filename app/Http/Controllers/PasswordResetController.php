@@ -8,6 +8,7 @@ use App\Http\Requests\PasswordResetRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 
 class PasswordResetController extends Controller
@@ -34,7 +35,7 @@ class PasswordResetController extends Controller
         );
 
          return $status === Password::PasswordReset
-            ? redirect()->route('home')->with('success', $status)
+            ? Redirect::route('home')->with('success', 'Wachtwoord is succesvol aangepast')
             : back()->withErrors(['email' => [$status]]);
     }
 }

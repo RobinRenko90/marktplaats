@@ -4,7 +4,7 @@
     <div class="flex justify-between flex-col md:flex-row mb-5">
         <p class="text-center text-xl">Mijn berichten</p>
     </div>
-    <div class="grid">
+    <div class="grid gap-2">
         @forelse($inboxes as $inbox)
 
             @php
@@ -13,7 +13,7 @@
                     : $inbox->customer;
             @endphp
 
-            <a href="{{ route('message.show', $otherUser->slug) }}">
+            <a class="border p-2" href="{{ route('message.show', $otherUser->slug) }}">
                 {{ $otherUser->fullName }}
             </a>
 
