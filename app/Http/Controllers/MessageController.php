@@ -9,6 +9,7 @@ use App\Models\Inbox;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 
 use Auth;
@@ -38,37 +39,33 @@ class MessageController extends Controller
             'content'       => $request->content,
         ]);
 
-        return route('message.show', $user);
-
+        return Redirect::route('message.show', $user);
     }
 
     public function show($user){
 
         $userId = last(explode('-', $user));
 
-        $advertiser = User::findOrFail($userId);
+        $contact = User::findOrFail($userId);
 
         $currentUserId = Auth::id();
-
-        $inbox = Inbox::where(function ($query) use ($currentUserId, $advertiser) {
-            $query->where('seller_id', min($currentUserId, $advertiser->id))
-                  ->where('customer_id', max($currentUserId, $advertiser->id));
+        
+        $inbox = Inbox::where(function ($query) use ($currentUserId, $contact) {
+            $query->where('seller_id', min($currentUserId, $contact->id))
+                  ->where('customer_id', max($currentUserId, $contact->id));
         })->first();
 
-        return view('message.show', compact('inbox', 'advertiser'));
+        return view('message.show', compact('inbox', 'contact'));
     }
 
-    public function newMessage(MessageRequest $request, User $user, string $uuid)
+    public function newMessage(MessageRequest $request, $user, string $uuid)
     {   
-        dd('hello');
-
         $message = Message::Create([
             'inbox_uuid'  => $uuid,
             'user_id'     => Auth::user()->id,
             'content'     => $request->content,
         ]);
 
-        return route('message.show', $user->slug);
-
+        return Redirect::route('message.show', $user);
     }
 }

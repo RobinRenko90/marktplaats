@@ -46,7 +46,7 @@ Route::middleware(['auth'])->group( function() {
 
     Route::get('/profile/messages', [MessageController::class, 'index'])->name('message.index');
     Route::get('/profile/messages/{user}', [MessageController::class, 'show'])->name('message.show');
-    Route::post('/profile/messages/{slug}', [MessageController::class, 'store'])->name('message.store');
+    Route::post('/profile/messages/{user}', [MessageController::class, 'store'])->name('message.store');
     Route::post('/profile/messages/{user}/{uuid}', [MessageController::class, 'newMessage'])->name('new.message');
 
     Route::resource('/categories', CategoryController::class)

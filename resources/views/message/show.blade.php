@@ -12,11 +12,7 @@
         @endif
     </div>
 
-
-    <form class="flex flex-wrap justify-center" action="{{ $inbox 
-    ? route('new.message', ['user' => $advertiser->slug, 'uuid' => $inbox->uuid]) 
-    : route('message.store', ['user' => $advertiser->slug]) 
-    }}" method="post">
+    <form class="flex flex-wrap justify-center" action="{{ $inbox ? route('new.message', [$contact->slug, $inbox->uuid]) : route('message.store', $contact->slug) }}" method="post">
         @csrf
             <div class="w-full">
                 <input class="border w-8/10 md:w-9/10 p-1 px-2 rounded-l-md" type="text" name="content" id="content" placeholder="....">
