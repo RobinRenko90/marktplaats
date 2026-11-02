@@ -71,7 +71,7 @@ class MessageController extends Controller
             'content'     => $request->content,
         ]);
 
-        if ($contact->notification == 0) {
+        if ($contact->notification == 1) {
             Mail::to($contact->email)
                 ->send(new AdvertisementReply($contact, $message->content, Auth::user()));        
         }

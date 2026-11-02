@@ -28,7 +28,7 @@
                 <input class="border rounded w-full py-1 px-2" type="text" name="price" id="price" value="{{ old('price') }}">
             </div>
         
-            <input type="submit" value="Advertentie aanmaken" class="cursor-pointer inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
+            <input type="submit" value="Advertentie plaatsen" class="cursor-pointer inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
         </form>
     </div>
 @endsection

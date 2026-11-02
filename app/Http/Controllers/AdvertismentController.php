@@ -49,7 +49,7 @@ class AdvertismentController extends Controller
             }
 
             return view('dashboard')->with([
-                'advertisements' => $advertisements->orderBy('premium', 'desc')->latest('created_at', 'desc')->paginate(10)->withQueryString(),
+                'advertisements' => $advertisements->orderBy('premium', 'desc')->latest('created_at', 'desc')->paginate(2)->withQueryString(),
                 'categories'     => Category::get(),
             ]);
         }
@@ -81,7 +81,7 @@ class AdvertismentController extends Controller
 
         $syncCategory = $advertisement->categories()->sync($validateData['category']);
 
-        return Redirect::route('dashboard')->with('success', 'Advertentie is aangemaakt');
+        return Redirect::route('advertisement.index')->with('success', 'Advertentie is aangemaakt');
     }
 
     /**
@@ -161,6 +161,6 @@ class AdvertismentController extends Controller
             'premium' => true,
         ]);
 
-        return Redirect::route('dashboard');
+        return Redirect::route('advertisement.index');
     }
 }

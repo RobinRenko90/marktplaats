@@ -20,7 +20,7 @@
                 <input class="border rounded w-full py-1 px-2" type="email" name="email" id="email" value="{{ $user->email }}">
             </div>
             <div>
-                <input type="checkbox" name="notification" id="notification" @checked(old('notification', $user->notification))><label class="ml-1" for="notification">Ik wil geen notificaties ontvangen</label>
+                <input type="checkbox" name="notification" id="notification" @checked(old('notification', $user->notification))><label class="ml-1" for="notification">Ik wil notificaties ontvangen</label>
             </div>
             <input class="cursor-pointer inline-block px-5 py-1.5 bg-blue-500 text-white rounded-sm text-sm leading-normal" type="submit" value="Aanpassen">
         </form>

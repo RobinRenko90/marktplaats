@@ -33,13 +33,10 @@ class RegistrationController extends Controller
 
         $user = User::create($validateData);
 
-        Mail::raw('Welkom bij marktplaats', function ($message) {
-            $message->to('gast@test.nl')
-                    ->subject('Welkom');
-        });
-
         Mail::to($user->email)->send(new welcomeMail($user));
 
-        return Redirect::route('login');
+        auth()->login($user);
+
+        return Redirect::route('dashboard');
     }
 }

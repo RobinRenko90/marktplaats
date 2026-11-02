@@ -34,4 +34,10 @@ class Inbox extends Model
     {
         return $this->hasMany(Message::class, 'inbox_uuid', 'uuid')->orderBy('created_at');
     }
+
+    public function latestMessage(): HasOne
+    {
+        return $this->hasOne(Message::class, 'inbox_uuid', 'uuid')
+                ->latestOfMany('created_at');
+    }
 }

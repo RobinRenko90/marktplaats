@@ -13,20 +13,13 @@
                     : $inbox->customer;
             @endphp
 
-            <a class="border p-2" href="{{ route('message.show', $otherUser->slug) }}">
-                {{ $otherUser->fullName }}
+            <a class="border p-2 text-sm rounded" href="{{ route('message.show', $otherUser->slug) }}">
+                <b>{{ $otherUser->fullName }}</b>
+                <p class="text-xs text-gray-500 font-normal">
+                    {{ Str::words($inbox->messages->last()->content, 15, '....') }}
+                    <span class="float-right mt-5">{{ $inbox->messages->last()->created_at }}</span>
+                </p>
             </a>
-
-
-                {{-- @if($inbox->customer->id == Auth::user()->id)
-                    <a href="{{ route('message.show', $inbox->seller->slug) }}">
-                        {{ $inbox->seller->fullName }}
-                    </a>
-                @else
-                    <a href="{{ route('message.show', $inbox->customer->slug) }}">
-                        {{ $inbox->customer->fullName }}
-                    </a>
-                @endif --}}
         @empty
 
         @endforelse
